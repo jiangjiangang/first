@@ -123,7 +123,7 @@ dmypy.json
 .pyre/
 
 <<<<<<< HEAD
-.idea/
+AXF/.idea/
 
 
 AXF/AXF/password.py

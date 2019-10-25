@@ -75,7 +75,7 @@ footer .home span {
 
 
 /*#swiperMenu li{*/
-  /*width:3.333333rem*/
+/*width:3.333333rem*/
 /*}*/
 
 #swiperMenu li img {
@@ -96,7 +96,6 @@ footer .home span {
 }
 
 
-
 .CVS fieldset {
     border: none;
     padding: 0;
@@ -112,7 +111,6 @@ footer .home span {
 }
 
 
-
 .CVS ul {
     display: flex;
 }
@@ -126,8 +124,6 @@ footer .home span {
 .CVS ul li img {
     width: 2.5rem;
 }
-
-
 
 
 .CVS ol {
