@@ -106,12 +106,12 @@ def active(request):
 
 
 def home(request):
-    main_wheel = MainWheel.objects.all()
-    data ={
+    main_wheels = MainWheel.objects.all()
+    data = {
         'title': '首页',
-        'main_wheel': main_wheel,
+        'main_wheels': main_wheels,
     }
-    return render(request, 'main/home.html')
+    return render(request, 'main/home.html', context=data)
 
 
 def market(request):
