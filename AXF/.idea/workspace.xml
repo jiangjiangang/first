@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1caf220a-f8c0-4a0c-9f41-571b274a3d2f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/AXF/password.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AXF/password.py" beforeDir="false" afterPath="$PROJECT_DIR$/AXF/password.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AXF/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/AXF/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -151,7 +152,7 @@
       <workItem from="1571721214205" duration="4175000" />
       <workItem from="1571729992178" duration="5531000" />
       <workItem from="1571878459761" duration="19613000" />
-      <workItem from="1571973415308" duration="245000" />
+      <workItem from="1571973415308" duration="582000" />
     </task>
     <servers />
   </component>

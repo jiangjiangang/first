@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from AXF.password import USERNAME, PASSWORD
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -133,6 +135,6 @@ CACHES = {
 
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'awdsjjgg@qq.com'
-EMAIL_HOST_PASSWORD = 'phbfzhdbwzpjbdif'
+EMAIL_HOST_USER = USERNAME
+EMAIL_HOST_PASSWORD = PASSWORD
 EMAIL_USE_SSL = True

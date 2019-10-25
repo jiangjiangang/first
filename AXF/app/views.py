@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
 from AXF.settings import MEDIA_KEY_PREFIX, EMAIL_HOST_USER
-from app.models import AXFUser
+from app.models import AXFUser, MainWheel
 from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active
 
 
@@ -106,7 +106,11 @@ def active(request):
 
 
 def home(request):
-    main_wheel = MainWheel.objects
+    main_wheel = MainWheel.objects.all()
+    data ={
+        'title': '首页',
+        'main_wheel': main_wheel,
+    }
     return render(request, 'main/home.html')
 
 

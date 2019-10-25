@@ -1,2 +1,2 @@
-USERNAME = ''
-PASSWORD = ''
+USERNAME = 'awdsjjgg@qq.com'
+PASSWORD = 'phbfzhdbwzpjbdif'
