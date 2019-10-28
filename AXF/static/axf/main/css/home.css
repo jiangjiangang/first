@@ -96,15 +96,7 @@ footer .home span {
 }
 
 
-<<<<<<< HEAD
 
-.CVS fieldset {
-=======
-.shop_container fieldset {
->>>>>>> parent of 15a53b6... Revert "home_end"
-    border: none;
-    padding: 0;
-}
 
 .shop_container fieldset > a {
     display: inline-block;
@@ -116,10 +108,7 @@ footer .home span {
 }
 
 
-<<<<<<< HEAD
 
-.CVS ul {
-=======
 .shop_container ul {
 >>>>>>> parent of 15a53b6... Revert "home_end"
     display: flex;
@@ -136,11 +125,7 @@ footer .home span {
 }
 
 
-<<<<<<< HEAD
 
-
-.CVS ol {
-=======
 .shop_container ol {
 >>>>>>> parent of 15a53b6... Revert "home_end"
     display: flex;

@@ -88,17 +88,12 @@ class Goods(models.Model):
     specifics = models.CharField(max_length=64)
     price = models.FloatField(default=0)
     marketprice = models.FloatField(default=1)
-    categoryid= models.IntegerField(default=1)
+    categoryid = models.IntegerField(default=1)
     childcid = models.IntegerField(default=1)
     childcidname = models.CharField(max_length=128)
     dealerid = models.IntegerField(default=1)
     storenums = models.IntegerField(default=1)
     productnum = models.IntegerField(default=1)
-
-
-
-
-
 
     class Meta:
         db_table = 'axf_goods'
