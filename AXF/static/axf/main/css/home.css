@@ -87,60 +87,60 @@ footer .home span {
 */
 
 
-.shop_container {
+.CVS {
     background: white;
 }
 
-.shop_container h2 img {
+.CVS h2 img {
     width: 100%;
 }
 
 
-.shop_container fieldset {
+.CVS fieldset {
     border: none;
     padding: 0;
 }
 
-.shop_container fieldset > a {
+.CVS fieldset > a {
     display: inline-block;
     width: 49%;
 }
 
-.shop_container fieldset img {
+.CVS fieldset img {
     width: 100%;
 }
 
 
-.shop_container ul {
+.CVS ul {
     display: flex;
 }
 
-.shop_container ul li {
+.CVS ul li {
     width: 2.5rem;
     text-align: center;
     font-size: 0.35rem;
 }
 
-.shop_container ul li img {
+.CVS ul li img {
     width: 2.5rem;
 }
 
 
-.shop_container ol {
+.CVS ol {
     display: flex;
     flex-wrap: wrap;
 }
 
-.shop_container ol li {
+.CVS ol li {
     list-style: none;
     width: 5rem;
 }
 
-.shop_container > ol a {
+.CVS > ol a {
     display: block;
 }
 
-.shop_container ol a img {
+.CVS ol a img {
     width: 100%;
 }
 
