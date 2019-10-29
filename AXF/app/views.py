@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
 from AXF.settings import MEDIA_KEY_PREFIX, EMAIL_HOST_USER
-from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType
+from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods
 from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active
 
 
@@ -131,8 +131,11 @@ def home(request):
 
 def market(request):
     foodtypes = FoodType.objects.all()
+    goods_list = Goods.objects.all()
     data = {
         'title': '闪购',
+        'foodtypes': foodtypes,
+        'goods_list': goods_list,
     }
     return render(request, 'main/market.html', context=data)
 

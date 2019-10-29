@@ -4,3 +4,42 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'axf/main/css/market.css' %}">
 {% endblock %}
+
+{% block content %}
+    <div id="market">
+        <aside>
+            <ul>
+                {% for foodtype in foodtypes %}
+                    <li>
+                        <a href="#">{{ foodtype.typename }}</a>
+                        <span class="yellowSlide"></span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <section>
+            <nav>
+                <ul>
+                    <li><span>全部分类 <span class="glyphicon glyphicon-chevron-down"></span></span></li>
+                    <li><span>综合排序 <span class="glyphicon glyphicon-chevron-down"></span></span></li>
+                </ul>
+            </nav>
+            <menu>
+                <ul>
+                    {% for goods in goods_list %}
+                        <li>
+                            <a href="#">
+                                <img src="#" alt="">
+                                <div class="shoppingInfo">
+                                    <h6>{{ goods.productlongname }}</h6>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </menu>
+        </section>
+    </div>
+{% endblock %}
