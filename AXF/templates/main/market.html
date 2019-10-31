@@ -15,7 +15,7 @@
             <ul>
                 {% for foodtype in foodtypes %}
                     <li>
-                        <a href="{% url 'axf:market_with_params' typeid=foodtype.typeid childcid=0 %}">{{ foodtype.typename }}</a>
+                        <a href="{% url 'axf:market_with_params' typeid=foodtype.typeid childcid=0 order_rule=0 %}">{{ foodtype.typename }}</a>
                         {#                    可能造成类型不一致#}
                         {% ifequal foodtype.typeid typeid %}
                             <span class="yellowSlide"></span>
@@ -66,11 +66,11 @@
                         {% for foodtype_childname in foodtype_childname_list %}
 
                             {% ifequal foodtype_childname.1 childcid %}
-                                <a href="{% url 'axf:market_with_params' typeid=typeid childcid=foodtype_childname.1 %}">
+                                <a href="{% url 'axf:market_with_params' typeid=typeid childcid=foodtype_childname.1 order_rule=0 %}">
                                     <button class="btn btn-success">{{ foodtype_childname.0 }}</button>
                                 </a>
                             {% else %}
-                                <a href="{% url 'axf:market_with_params' typeid=typeid childcid=foodtype_childname.1 %}">
+                                <a href="{% url 'axf:market_with_params' typeid=typeid childcid=foodtype_childname.1 order_rule=0 %}">
                                     <button class="btn btn-default">{{ foodtype_childname.0 }}</button>
                                 </a>
                             {% endifequal %}
@@ -79,15 +79,11 @@
                 </div>
                 <div id="sort_rule_container">
                     <div>
-                        <a href="#">
-                            <button class="btn btn-success">综合排序</button>
-                        </a>
-                        <a href="#">
-                            <button class="btn default">价格升序</button>
-                        </a>
-                        <a href="#">
-                            <button class="btn default">价格降序</button>
-                        </a>
+                        {% for order_rule in order_rule_list %}
+                            <a href="{% url 'axf:market_with_params' typeid=typeid childcid=childcid order_rule=order_rule.1 %}">
+                                <button class="btn btn-success">{{ order_rule.0}}</button>
+                            </a>
+                        {% endfor %}
                     </div>
                 </div>
             </menu>

@@ -8,7 +8,8 @@ from django.template import loader
 from django.urls import reverse
 from AXF.settings import MEDIA_KEY_PREFIX, EMAIL_HOST_USER
 from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods
-from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active, ALL_TYPE
+from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active, ALL_TYPE, ORDER_TOTAL, ORDER_PRICE_UP, \
+    ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN
 
 
 def index(request):
@@ -132,23 +133,46 @@ def home(request):
 def market(request):
     return redirect(reverse('axf:market_with_params', kwargs={
         'typeid': 104749,
-        'childcid': 0
+        'childcid': 0,
+        'order_rule': 0,
     }))
 
 
-def market_with_params(request, typeid, childcid):
+def market_with_params(request, typeid, childcid, order_rule):
     foodtypes = FoodType.objects.all()
     goods_list = Goods.objects.filter(categoryid=typeid)
+
     if childcid == ALL_TYPE:
         pass
     else:
         goods_list = goods_list.filter(childcid=childcid)
+
+    if order_rule == ORDER_TOTAL:
+        pass
+    elif order_rule == ORDER_PRICE_UP:
+        goods_list = goods_list.order_by('price')
+    elif order_rule == ORDER_PRICE_DOWN:
+        goods_list = goods_list.order_by('-price')
+    elif order_rule == ORDER_SALE_UP:
+        goods_list = goods_list.order_by('productnum')
+    elif order_rule == ORDER_SALE_DOWN:
+        goods_list = goods_list.order_by('-productnum')
+
     foodtype = foodtypes.get(typeid=typeid)
     foodtypechildnames = foodtype.childtypenames
     foodtypechildname_list = foodtypechildnames.split("#")
     foodtype_childname_list = []
     for foodtypechildname in foodtypechildname_list:
         foodtype_childname_list.append(foodtypechildname.split(":"))
+
+    order_rule_list = [
+        ['綜合排序', ORDER_TOTAL],
+        ['价格升序', ORDER_PRICE_UP],
+        ['价格降序', ORDER_PRICE_DOWN],
+        ['销量升序', ORDER_SALE_UP],
+        ['销量降序', ORDER_SALE_DOWN],
+    ]
+
     data = {
         'title': '闪购',
         'foodtypes': foodtypes,
@@ -157,6 +181,8 @@ def market_with_params(request, typeid, childcid):
         'typeid': int(typeid),
         'foodtype_childname_list': foodtype_childname_list,
         'childcid': childcid,
+        'order_rule_list': order_rule_list,
+
     }
     return render(request, 'main/market.html', context=data)
 
