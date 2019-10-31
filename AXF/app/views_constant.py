@@ -5,6 +5,7 @@ from AXF.settings import EMAIL_HOST, EMAIL_HOST_USER
 
 HTTP_USER_EXIST = 901
 HTTP_OK = 200
+ALL_TYPE = '0'
 
 
 def send_email_active(username, email, u_token):

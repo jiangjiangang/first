@@ -8,7 +8,7 @@ from django.template import loader
 from django.urls import reverse
 from AXF.settings import MEDIA_KEY_PREFIX, EMAIL_HOST_USER
 from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods
-from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active
+from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active, ALL_TYPE
 
 
 def index(request):
@@ -130,12 +130,33 @@ def home(request):
 
 
 def market(request):
+    return redirect(reverse('axf:market_with_params', kwargs={
+        'typeid': 104749,
+        'childcid': 0
+    }))
+
+
+def market_with_params(request, typeid, childcid):
     foodtypes = FoodType.objects.all()
-    goods_list = Goods.objects.all()
+    goods_list = Goods.objects.filter(categoryid=typeid)
+    if childcid == ALL_TYPE:
+        pass
+    else:
+        goods_list = goods_list.filter(childcid=childcid)
+    foodtype = foodtypes.get(typeid=typeid)
+    foodtypechildnames = foodtype.childtypenames
+    foodtypechildname_list = foodtypechildnames.split("#")
+    foodtype_childname_list = []
+    for foodtypechildname in foodtypechildname_list:
+        foodtype_childname_list.append(foodtypechildname.split(":"))
     data = {
         'title': '闪购',
         'foodtypes': foodtypes,
         'goods_list': goods_list,
+        # 可能造成类型不一致
+        'typeid': int(typeid),
+        'foodtype_childname_list': foodtype_childname_list,
+        'childcid': childcid,
     }
     return render(request, 'main/market.html', context=data)
 

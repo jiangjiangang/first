@@ -192,8 +192,16 @@ section menu ul li a img {
     padding: 0 0.35rem 0 0;
     color: red;
 }
+.price > span:before {
+    content: "￥";
+    color: red;
+}
 
 .price > s {
+    color: grey;
+}
+.price > s:before {
+    content:"￥";
     color: grey;
 }
 
@@ -249,7 +257,7 @@ section menu > div > div {
     padding-bottom: 0.3rem;
 }
 
-section menu > div > div > a > span {
+section menu > div > div > a > button {
     border: 0.04rem solid #e0e0e0;
     padding: 0.1rem 0.2rem;
     margin-left: 0.3rem;
