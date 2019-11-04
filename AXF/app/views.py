@@ -59,9 +59,17 @@ def register(request):
 
 def login(request):
     if request.method == 'GET':
+
+        error_message = request.session.get('error_message')
+
         data = {
             'title': '登录',
         }
+
+        if error_message:
+            del request.session['error_message']
+            data['error_message'] = error_message
+
         return render(request, 'user/login.html', context=data)
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -70,8 +78,19 @@ def login(request):
         if users.exists():
             user = users.first()
             if check_password(password, user.u_password):
-                request.session['user_id'] = user.id
-                return redirect(reverse('axf:mine'))
+                if user.is_active:
+                    request.session['user_id'] = user.id
+                    return redirect(reverse('axf:mine'))
+                else:
+                    print('用户未激活')
+                    request.session['error_message'] = 'not active'
+                    redirect(reverse("axf:login"))
+            else:
+                print('密码错误')
+                request.session['error_message'] = 'password error'
+                redirect(reverse("axf:login"))
+        print('用户名不存在')
+        request.session['error_message'] = 'user does not exist'
         return redirect(reverse('axf:login'))
 
 
@@ -182,6 +201,7 @@ def market_with_params(request, typeid, childcid, order_rule):
         'foodtype_childname_list': foodtype_childname_list,
         'childcid': childcid,
         'order_rule_list': order_rule_list,
+        'order_rule_view': order_rule,
 
     }
     return render(request, 'main/market.html', context=data)

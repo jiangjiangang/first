@@ -80,9 +80,16 @@
                 <div id="sort_rule_container">
                     <div>
                         {% for order_rule in order_rule_list %}
-                            <a href="{% url 'axf:market_with_params' typeid=typeid childcid=childcid order_rule=order_rule.1 %}">
-                                <button class="btn btn-success">{{ order_rule.0}}</button>
-                            </a>
+                            {% ifequal order_rule.1 order_rule_view %}
+                                <a href="{% url 'axf:market_with_params' typeid=typeid childcid=childcid order_rule=order_rule.1 %}">
+                                    <button class="btn btn-success">{{ order_rule.0 }}</button>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'axf:market_with_params' typeid=typeid childcid=childcid order_rule=order_rule.1 %}">
+                                    <button class="btn btn-default">{{ order_rule.0 }}</button>
+                                </a>
+                            {% endifequal %}
+
                         {% endfor %}
                     </div>
                 </div>

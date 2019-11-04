@@ -16,6 +16,7 @@
 
             {% csrf_token %}
 
+            <p>{{ error_message }}</p>
             <div class="form-group">
                 <label for="username_input">用户名：</label>
                 <input name="username" type="text" class="form-control" id="username_input" placeholder="用户名/邮箱">
