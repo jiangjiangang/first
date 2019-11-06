@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1caf220a-f8c0-4a0c-9f41-571b274a3d2f" name="Default Changelist" comment="Revert &quot;Update .gitignore&quot;&#10;&#10;This reverts commit 8966ac3b8fb4b509ecbf496750ca12df73183f4c.&#10;&#10;# Conflicts:&#10;#&#9;.gitignore">
-      <change beforePath="$PROJECT_DIR$/static/axf/main/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/axf/main/css/home.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/axf/main/js/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/axf/main/js/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AXF.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AXF.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,9 +48,9 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/.virtualenvs/django/bin" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -135,7 +135,16 @@
       <workItem from="1572485871251" duration="8647000" />
       <workItem from="1572510804073" duration="2144000" />
       <workItem from="1572868457533" duration="2513000" />
+      <workItem from="1573033245403" duration="926000" />
     </task>
+    <task id="LOCAL-00001" summary="Revert &quot;Update .gitignore&quot;&#10;&#10;This reverts commit 8966ac3b8fb4b509ecbf496750ca12df73183f4c.&#10;&#10;# Conflicts:&#10;#&#9;.gitignore">
+      <created>1573033946822</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573033946822</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,5 +162,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Revert &quot;Update .gitignore&quot;&#10;&#10;This reverts commit 8966ac3b8fb4b509ecbf496750ca12df73183f4c.&#10;&#10;# Conflicts:&#10;#&#9;.gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Revert &quot;Update .gitignore&quot;&#10;&#10;This reverts commit 8966ac3b8fb4b509ecbf496750ca12df73183f4c.&#10;&#10;# Conflicts:&#10;#&#9;.gitignore" />
   </component>
 </project>
