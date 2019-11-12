@@ -6,7 +6,7 @@ from django.utils.deprecation import MiddlewareMixin
 from app.models import AXFUser
 
 REQUIRE_LOGIN_JSON = [
-    '/axf/',
+    '/axf/addtocart/',
 ]
 REQUIRE_LOGIN = [
 
@@ -28,14 +28,17 @@ class LoginMiddleware(MiddlewareMixin):
                         'status': 302,
                         'msg': 'user not avaliable'
                     }
-                    return JsonResponse(data=data)
+                    return JsonResponse(data)
             else:
                 # return redirect(reverse('axf:login'))
                 data = {
                     'status': 302,
                     'msg': 'user not avaliable'
                 }
-                return JsonResponse(data=data)
+                return JsonResponse(data)
+
+
+
         # 未登录重定向到登陆页面
         if request.path in REQUIRE_LOGIN:
             user_id = request.session.get('user_id')

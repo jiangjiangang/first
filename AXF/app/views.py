@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
 from AXF.settings import MEDIA_KEY_PREFIX, EMAIL_HOST_USER
-from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods
+from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods, Cart
 from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active, ALL_TYPE, ORDER_TOTAL, ORDER_PRICE_UP, \
     ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN
 
@@ -89,8 +89,9 @@ def login(request):
                 print('密码错误')
                 request.session['error_message'] = 'password error'
                 redirect(reverse("axf:login"))
-        print('用户名不存在')
-        request.session['error_message'] = 'user does not exist'
+        else:
+            print('用户名不存在')
+            request.session['error_message'] = 'user does not exist'
         return redirect(reverse('axf:login'))
 
 
@@ -118,6 +119,7 @@ def active(request):
     u_token = request.GET.get('u_token')
     user_id = cache.get(u_token)
     if user_id:
+        cache.delete(u_token)
         user = AXFUser.objects.get(pk=user_id)
         user.is_active = True
         user.save()
@@ -209,3 +211,22 @@ def market_with_params(request, typeid, childcid, order_rule):
 
 def cart(request):
     return render(request, 'main/cart.html')
+
+
+def add_to_cart(request):
+    goodsid = request.GET.get('goodsid')
+    carts = Cart.objects.filter(c_user=request.user).filter(c_goods_id=goodsid)
+    if carts.exists():
+        cart_object = carts.first()
+        cart_object.c_goods_num = cart_object.c_goods_num + 1
+    else:
+        cart_object = Cart()
+        cart_object.c_goods_id = goodsid
+        cart_object.c_user = request.user
+    cart_object.save()
+
+    data = {
+        'status': 200,
+        'msg': 'add success',
+    }
+    return JsonResponse(data)
