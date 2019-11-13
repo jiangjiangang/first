@@ -210,7 +210,15 @@ def market_with_params(request, typeid, childcid, order_rule):
 
 
 def cart(request):
-    return render(request, 'main/cart.html')
+
+    carts = Cart.objects.filter(c_user=request.user)
+
+    data = {
+        'title': '购物车',
+        'carts': carts,
+    }
+
+    return render(request, 'main/cart.html',context=data)
 
 
 def add_to_cart(request):
@@ -228,5 +236,6 @@ def add_to_cart(request):
     data = {
         'status': 200,
         'msg': 'add success',
+        'c_goods_num': cart_object.c_goods_num,
     }
     return JsonResponse(data)

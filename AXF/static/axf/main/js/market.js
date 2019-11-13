@@ -65,6 +65,8 @@ $(function () {
 
             if (data['status'] === 302){
                 window.open('/axf/login/', "_self");
+            }else if (data['status'] === 200){
+                $add.prev('span').html(data['c_goods_num'])
             }
 
         })

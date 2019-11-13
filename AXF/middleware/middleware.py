@@ -9,7 +9,7 @@ REQUIRE_LOGIN_JSON = [
     '/axf/addtocart/',
 ]
 REQUIRE_LOGIN = [
-
+    '/axf/cart/',
 ]
 
 

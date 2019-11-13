@@ -4,3 +4,78 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'axf/main/css/cart.css' %}">
 {% endblock %}
+
+{% block content %}
+    <div id="cart">
+        <h3>Cart</h3>
+        <div class="full">
+            <section>
+                <ul>
+                    <li>收&nbsp;&nbsp;货&nbsp;&nbsp;人：&nbsp;&nbsp;Rock</li>
+                    <li>电&nbsp;&nbsp;&nbsp;&nbsp;话：110</li>
+                    <li>地&nbsp;&nbsp;&nbsp;&nbsp;址：新界</li>
+                </ul>
+
+                <div class="bill">
+                    <p>闪送超市</p>
+                    <p>0元起送满30免运费22：00前可送达</p>
+                    <a href="#">凑单专区</a>
+                </div>
+
+                <div class="delivery">
+                    <span>收货时间</span>
+                    <span>一小时之内送达</span>
+                    <a href="#">可预订&gt;</a>
+                </div>
+
+                <div class="delivery">
+                    <span>收获备注：</span>
+                    <input type="text" property="可输入100字以内特殊要求内容">
+                </div>
+
+                <ul>
+                    {% for cart in carts %}
+                        <li class="menuList">
+                            <div class="confirm">
+                                <span>
+                                    {% if cart.c_is_select %}
+                                        <span>√</span>
+                                    {% else %}
+                                        <span></span>
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <a href="#">
+                                <span>{{ cart.c_goods.productlongname }}</span>
+                            </a>
+
+                            <p>{{ cart.c_goods.productlongname }}</p>
+                            <section>
+                                <button>-</button>
+                                <span>{{ cart.c_goods_num }}</span>
+                                <button>+</button>
+                            </section>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="payTheBill">
+                    <div class="confirm">
+                        <span>
+                            <span></span>
+                        </span>
+                    </div>
+                    <p>
+                        <span>全选</span>
+                        <span>共计：</span>
+                        <span>0</span>
+                    </p>
+
+                    <a href="#">下单</a>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+{% endblock %}
