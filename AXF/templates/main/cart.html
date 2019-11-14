@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'axf/main/css/cart.css' %}">
 {% endblock %}
 
+{% block ext_js %}
+    <script type="text/javascript" src="{% static 'axf/main/js/cart.js' %}"></script>
+{% endblock %}
+
 {% block content %}
     <div id="cart">
         <h3>Cart</h3>
@@ -35,7 +39,7 @@
 
                 <ul>
                     {% for cart in carts %}
-                        <li class="menuList">
+                        <li class="menuList" cartid="{{ cart.id }}">
                             <div class="confirm">
                                 <span>
                                     {% if cart.c_is_select %}
@@ -51,18 +55,22 @@
 
                             <p>{{ cart.c_goods.productlongname }}</p>
                             <section>
-                                <button>-</button>
+                                <button class="subShopping">-</button>
                                 <span>{{ cart.c_goods_num }}</span>
-                                <button>+</button>
+                                <button class="addShopping">+</button>
                             </section>
                         </li>
                     {% endfor %}
                 </ul>
 
                 <div class="payTheBill">
-                    <div class="confirm">
+                    <div class="all_select">
                         <span>
-                            <span></span>
+                            {% if is_all_select %}
+                                <span>√</span>
+                            {% else %}
+                                <span></span>
+                            {% endif %}
                         </span>
                     </div>
                     <p>

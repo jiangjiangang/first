@@ -7,6 +7,7 @@ from app.models import AXFUser
 
 REQUIRE_LOGIN_JSON = [
     '/axf/addtocart/',
+    '/axf/changecartstate/',
 ]
 REQUIRE_LOGIN = [
     '/axf/cart/',
