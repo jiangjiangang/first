@@ -276,3 +276,19 @@ def sub_shopping(request):
         data['c_goods_num'] = 0
 
     return JsonResponse(data=data)
+
+
+def all_select(request):
+    cart_list = request.GET.get('cart_list')
+    cart_list = cart_list.split("#")
+    carts = Cart.objects.filter(pk__in=cart_list)
+    for cart_obj in carts:
+        cart_obj.c_is_select = not cart_obj.c_is_select
+        cart_obj.save()
+
+    data = {
+        'status': 200,
+        'msg': 'ok',
+    }
+
+    return JsonResponse(data=data)
