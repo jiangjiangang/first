@@ -47,4 +47,28 @@ $(function () {
 
     })
 
+    $(".all_select").click(function () {
+
+        var $all_select = $(this);
+        var select_list = [];
+        var unselect_list = [];
+
+        $(".confirm").each(function () {
+            var $confirm = $(this);
+            var cardid = $confirm.parents("li").attr("cardid");
+
+            if($confirm.find("span").find("span").html().trim()){
+                select_list.push(cardid);
+            }else{
+                unselect_list.push(cardid);
+            }
+        })
+        if(unselect_list.length > 0){
+           $.getJSON("/axf/allselect", {"cart_list": unselect_list}, function (data) {
+               console.log(data);
+           })
+        }
+
+    })
+
 })
