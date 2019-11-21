@@ -7,9 +7,10 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
 from AXF.settings import MEDIA_KEY_PREFIX, EMAIL_HOST_USER
-from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods, Cart
+from app.models import AXFUser, MainWheel, MainNav, MainMustBuy, MainShop, MainShow, FoodType, Goods, Cart, Order, \
+    OrderGoods
 from app.views_constant import HTTP_OK, HTTP_USER_EXIST, send_email_active, ALL_TYPE, ORDER_TOTAL, ORDER_PRICE_UP, \
-    ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN
+    ORDER_PRICE_DOWN, ORDER_SALE_UP, ORDER_SALE_DOWN, get_total_price
 
 
 def index(request):
@@ -218,6 +219,7 @@ def cart(request):
         'title': '购物车',
         'carts': carts,
         'is_all_select': is_all_select,
+        'total_price': get_total_price(),
     }
 
     return render(request, 'main/cart.html', context=data)
@@ -249,10 +251,14 @@ def change_cart_state(request):
     cart_obj.c_is_select = not cart_obj.c_is_select
     cart_obj.save()
 
+    is_all_select = not Cart.objects.filter(c_user=request.user).filter(c_is_select=False).exists()
+
     data = {
         'status': 200,
         'msg': 'change ok',
         'c_is_select': cart_obj.c_is_select,
+        'is_all_select': is_all_select,
+        'total_price': get_total_price(),
     }
 
     return JsonResponse(data=data)
@@ -265,6 +271,7 @@ def sub_shopping(request):
     data = {
         'status': 200,
         'msg': 'ok',
+
     }
 
     if cart_obj.c_goods_num > 1:
@@ -275,13 +282,15 @@ def sub_shopping(request):
         cart_obj.delete()
         data['c_goods_num'] = 0
 
+    data['total_price'] = get_total_price()
+
     return JsonResponse(data=data)
 
 
 def all_select(request):
     cart_list = request.GET.get('cart_list')
     cart_list = cart_list.split("#")
-    carts = Cart.objects.filter(pk__in=cart_list)
+    carts = Cart.objects.filter(id__in=cart_list)
     for cart_obj in carts:
         cart_obj.c_is_select = not cart_obj.c_is_select
         cart_obj.save()
@@ -289,6 +298,43 @@ def all_select(request):
     data = {
         'status': 200,
         'msg': 'ok',
+        'total_price': get_total_price(),
     }
 
     return JsonResponse(data=data)
+
+
+def make_order(request):
+    carts = Cart.objects.filter(c_user=request.user).filter(c_is_select=True)
+
+    order = Order()
+    order.o_user = request.user
+    order.o_price = get_total_price()
+    order.save()
+
+    for cart_obj in carts:
+        ordergoods = OrderGoods()
+        ordergoods.o_order = order
+        ordergoods.o_goods_num = cart_obj.c_goods_num
+        ordergoods.o_goods = cart_obj.c_goods
+        ordergoods.save()
+        cart_obj.delete()
+
+    data = {
+        'status': 200,
+        'msg': 'ok',
+        'order_id': order.id,
+    }
+    return JsonResponse(data=data)
+
+
+def order_detail(request):
+    order_id = request.GET.get('orderid')
+    order = Order.objects.get(pk=order_id)
+
+    data = {
+        'title': '订单详情',
+        'order': order,
+    }
+
+    return render(request, 'order/order_detail.html', context=data)

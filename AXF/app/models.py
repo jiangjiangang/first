@@ -2,6 +2,9 @@ from django.db import models
 
 
 # axf_wheel(img, name, trackid)
+from app.ORDER_STATUS import ORDER_STATUS_NOT_PAY
+
+
 class Main(models.Model):
     img = models.CharField(max_length=255)
     name = models.CharField(max_length=64)
@@ -112,7 +115,7 @@ class AXFUser(models.Model):
 
 
 class Cart(models.Model):
-    c_user= models.ForeignKey(AXFUser, on_delete=models.CASCADE)
+    c_user = models.ForeignKey(AXFUser, on_delete=models.CASCADE)
     c_goods = models.ForeignKey(Goods, on_delete=models.CASCADE)
 
     c_goods_num = models.IntegerField(default=1)
@@ -120,3 +123,22 @@ class Cart(models.Model):
 
     class Meta:
         db_table = 'axf_cart'
+
+
+class Order(models.Model):
+    o_user = models.ForeignKey(AXFUser, on_delete=models.CASCADE)
+    o_price = models.FloatField(default=0)
+    o_time = models.DateTimeField(auto_now=True)
+    o_status = models.IntegerField(default=0)
+
+    class Meta:
+        db_table = 'axf_order'
+
+
+class OrderGoods(models.Model):
+    o_order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    o_goods = models.ForeignKey(Goods, on_delete=models.CASCADE)
+    o_goods_num = models.IntegerField(default=ORDER_STATUS_NOT_PAY)
+
+    class Meta:
+        db_table = 'axf_ordergoods'

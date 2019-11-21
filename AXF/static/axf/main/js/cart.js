@@ -12,16 +12,23 @@ $(function () {
         $.getJSON('/axf/changecartstate/', {'cartid': cartid}, function (data) {
             console.log(data);
             if (data['status'] === 200) {
+                $("#total_price").html(data['total_price']);
+
                 if (data['c_is_select']) {
-                    $confirm.find('span').find('span').html('√')
+                    $confirm.find('span').find('span').html('√');
                 } else {
-                    $confirm.find('span').find('span').html('')
+                    $confirm.find('span').find('span').html('');
+                }
+                if (data['is_all_select']) {
+                    $(".all_select span span").html("√");
+                } else {
+                    $(".all_select span span").html("");
                 }
             }
 
         })
 
-    })
+    });
 
     $(".subShopping").click(function () {
 
@@ -32,10 +39,11 @@ $(function () {
         var cartid = $li.attr('cartid');
 
         $.getJSON('/axf/subshopping/', {'cartid': cartid}, function (data) {
-            console.log(data)
+            console.log(data);
 
 
             if (data['status'] === 200) {
+                $("#total_price").html(data['total_price']);
                 if (data['c_goods_num'] > 0) {
                     var $span = $sub.next('span');
                     $span.html(data['c_goods_num']);
@@ -45,7 +53,7 @@ $(function () {
             }
         })
 
-    })
+    });
 
     $(".all_select").click(function () {
 
@@ -55,34 +63,63 @@ $(function () {
 
         $(".confirm").each(function () {
             var $confirm = $(this);
-            var cardid = $confirm.parents("li").attr("cartid");
+            var cartid = $confirm.parents("li").attr("cartid");
 
             if ($confirm.find("span").find("span").html().trim()) {
-                select_list.push(cardid);
+                select_list.push(cartid);
             } else {
-                unselect_list.push(cardid);
+                unselect_list.push(cartid);
             }
-        })
+        });
         if (unselect_list.length > 0) {
-            $.getJSON("/axf/allselect", {"cart_list": unselect_list.join('#')}, function (data) {
+            $.getJSON("/axf/allselect/", {"cart_list": unselect_list.join('#')}, function (data) {
                 console.log(data);
                 if (data['status'] === 200) {
+                    $("#total_price").html(data['total_price']);
                     $(".confirm").find("span").find("span").html('√');
-                    $all_select.find("span").find("span").html('√');
+                    $all_select.find("span").find("span").html("√");
                 }
             })
         } else {
             if (select_list.length > 0) {
-                $.getJSON("/axf/allselect", {"cart_list": unselect_list.join('#')}, function (data) {
+                $.getJSON("/axf/allselect/", {"cart_list": select_list.join('#')}, function (data) {
                     console.log(data);
                     if (data['status'] === 200) {
+                        $("#total_price").html(data['total_price']);
                         $(".confirm").find("span").find("span").html('');
-                        $all_select.find("span").find("span").html('');
+                        $all_select.find("span").find("span").html("");
                     }
                 })
             }
         }
 
+    })
+
+    $("#make_order").click(function () {
+
+        var select_list = [];
+        var unselect_list = [];
+
+        $(".confirm").each(function () {
+            var $confirm = $(this);
+            var cartid = $confirm.parents("li").attr("cartid");
+
+            if ($confirm.find("span").find("span").html().trim()) {
+                select_list.push(cartid);
+            } else {
+                unselect_list.push(cartid);
+            }
+        })
+        if (select_list.length === 0) {
+            return
+        }
+
+        $.getJSON("/axf/makeorder/", function (data) {
+            console.log(data)
+            if (data['status'] === 200) {
+                window.open('/axf/orderdetail/?orderid=' + data['order_id'], "_self");
+            }
+        })
     })
 
 })

@@ -312,7 +312,7 @@ h3 {
     font-size: 0.5rem;
 }
 
-.payTheBill > a {
+.payTheBill > span {
     background: yellow;
     position: absolute;
     right: 0;
